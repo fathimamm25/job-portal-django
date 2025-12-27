@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>Jobs</title>
+</head>
+<body>
+<h2>Available Jobs</h2>
+
+{% for job in jobs %}
+    <div>
+        <h3>{{ job.title }}</h3>
+        <p>{{ job.description }}</p>
+        <p><b>Skills:</b> {{ job.skills }}</p>
+        <p><b>Location:</b> {{ job.location }}</p>
+
+        <form method="post" action="{% url 'apply_job' job.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="resume" required>
+            <button type="submit">Apply</button>
+        </form>
+    </div>
+    <hr>
+{% endfor %}
+
+</body>
+</html>
